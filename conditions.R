@@ -37,3 +37,4 @@ data9 %>%
   summarise(booking_count = n()) %>%
   arrange(desc(booking_count)) %>%
   head(15)
+

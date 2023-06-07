@@ -54,3 +54,4 @@ data$assigned_room_type <- factor(data$assigned_room_type)
 data$deposit_type <- factor(data$deposit_type)
 data$customer_type <- factor(data$customer_type)
 data$reservation_status <- factor(data$reservation_status)
+
