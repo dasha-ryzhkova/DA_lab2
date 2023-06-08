@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 library("stringr")
 
-data <- read.csv('hotel_bookings.csv')
+# data <- read.csv('hotel_bookings.csv')
 
 #lead_time
 data1 <- data  %>%  filter(lead_time < 600) 

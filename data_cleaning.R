@@ -55,3 +55,56 @@ data$deposit_type <- factor(data$deposit_type)
 data$customer_type <- factor(data$customer_type)
 data$reservation_status <- factor(data$reservation_status)
 
+
+north_countries <- c('ATA', 'DNK', 'EST', 'FIN', 'FRO', 'GBR', 'IMN', 'IRL', 'ISL',
+                     'LTU', 'LVA', 'NOR', 'SWE')
+south_countries <- c('ABW', 'AGO', 'AIA', 'ALB', 'AND', 'ARE', 'ARG', 'ARM', 'ASM',
+                     'ATF', 'AUS', 'AZE', 'BDI', 'BEN', 'BFA', 'BGD', 'BGR', 'BHR',
+                     'BHS', 'BIH', 'BOL', 'BRA', 'BRB', 'BWA', 'CAF', 'CHL', 'CIV',
+                     'CMR', 'COL', 'COM', 'CPV', 'CRI', 'CUB', 'CYM', 'CYP', 'DMA',
+                     'DOM', 'DZA', 'ECU', 'EGY', 'ESP', 'ETH', 'FJI', 'GAB', 'GEO',
+                     'GHA', 'GIB', 'GLP', 'GNB', 'GRC', 'GTM', 'GUY', 'HND', 'HRV', 
+                     'IDN', 'IND', 'IRQ', 'ISR', 'ITA', 'JAM', 'JOR', 'KEN', 'KHM',
+                     'KIR', 'KNA', 'KWT', 'LAO', 'LBN', 'LBY', 'LCA', 'LKA', 'MAR',
+                     'MCO', 'MDG', 'MDV', 'MEX', 'MKD', 'MLI', 'MLT', 'MMR', 'MNE',
+                     'MOZ', 'MRT', 'MUS', 'MWI', 'MYS', 'MYT', 'NAM', 'NCL', 'NGA', 
+                     'NIC', 'NZL', 'OMN', 'PAK', 'PAN', 'PER', 'PHL', 'PLW', 'PRI', 
+                     'PRT', 'PRY', 'PYF', 'QAT', 'RWA', 'SAU', 'SDN', 'SEN', 'SGP', 
+                     'SLE', 'SLV', 'SMR', 'STP', 'SUR', 'SYC', 'SYR', 'TGO', 'THA',
+                     'TJK', 'TMP', 'TUN', 'TUR', 'TZA', 'UGA', 'UMI', 'URY', 'VEN',
+                     'VGB', 'VNM', 'ZAF', 'ZMB', 'ZWE', 'IRN')
+centre_countries <- c('AUT', 'BEL', 'BLR', 'CHE', 'CHN', 'CN', 'CZE', 'DEU', 'DJI',
+                      'FRA', 'GGY', 'HKG', 'HUN', 'JEY', 'JPN', 'KAZ', 'KOR', 'LIE',
+                      'LUX', 'MAC', 'NLD', 'NPL', 'POL', 'ROU', 'RUS', 'SRB', 'SVK', 
+                      'SVN', 'TWN', 'UKR', 'USA', 'UZB')
+
+areas <- c(north_countries, south_countries, centre_countries)
+data <- data %>% mutate(area = case_when(
+  country %in% north_countries ~ 'North',
+  country %in% south_countries ~ 'South',
+  country %in% centre_countries ~ 'Centre'
+))
+
+
+other <- c('October', 'November', 'December', 'January', 'February', 'March', 'April')
+
+warm <- c('May', 'June', 'July', 'August', 'September')
+
+seasons <- c(warm, other)
+
+data <- data %>% mutate(season = case_when(
+  arrival_date_month %in% warm ~ 'Warm',
+  arrival_date_month %in% other ~ 'Cold'
+))
+
+data <- data %>% mutate(with_children = case_when(
+  all_children > 0 ~ 'Yes',
+  all_children == 0  ~ 'No'
+))
+
+
+data <- data %>% mutate(lead_time_case = case_when(
+  lead_time < 100 ~ 'Short',
+  lead_time < 300  ~ 'Middle',
+  lead_time >= 300  ~ 'Long'
+))
