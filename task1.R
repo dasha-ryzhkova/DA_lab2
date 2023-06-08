@@ -16,6 +16,7 @@ ggplot(data = median_adr) +
   theme(text = element_text(size = 15))
 
 
+
 df <- data %>% group_by(area) %>%
   summarise(mean_hat = mean(adr),
             var_hat = var(adr) / n())
